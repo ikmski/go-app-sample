@@ -1,5 +1,5 @@
 # meta
-NAME := sample
+NAME := go-app-sample
 VERSION := 0.1.0
 REVISION := $(shell git rev-parse --short HEAD)
 
@@ -61,7 +61,7 @@ bin/$(NAME): $(SOURCES)
 
 .PHONY: install
 ## install
-install:
+install: install-deps
 	go install \
 		-a -v \
 		-tags netgo \
