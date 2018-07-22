@@ -2,6 +2,7 @@
 NAME := go-app-sample
 VERSION := 0.1.0
 REVISION := $(shell git rev-parse --short HEAD)
+DOCKER_IMAGE := ${NAME}
 
 SOURCES := $(shell find . -type f -name "*.go")
 GOFILES := $(shell find . -type f -name "*.go" -not -name '*_test.go' -not -path "./vendor/*")
@@ -74,6 +75,16 @@ install: install-deps
 clean:
 	go clean -i ./...
 	rm -rf bin/*
+
+.PHONY: docker-build
+## docker build
+docker-build:
+	docker build --rm -t ${DOCKER_IMAGE} .
+
+.PHONY: docker-run
+## docker run
+docker-run:
+	docker run --rm ${DOCKER_IMAGE}
 
 .PHONY: help
 ## show help
